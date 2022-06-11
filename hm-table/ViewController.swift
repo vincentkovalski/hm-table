@@ -8,7 +8,7 @@
 import UIKit
 
 struct Section {
-    let options: [SettingsOption]
+    let options: [SettingsOptionType]
 }
 
 enum SettingsOptionType {
@@ -38,11 +38,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
+        table.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifier)
 
         return table
     }()
 
-    var models = [SettingsOption]()
+    var models = [Section]()
 
 
 
@@ -60,73 +61,102 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 
     func confifure() {
-        models.append(
-            // зачем контент of
-            contentsOf: [
-                (SettingsOption(title: "Авиарежим", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "Wi-fi", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "Bluetooth", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "Сотовая связь", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "Режим модема", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "VPN", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-            ])
+        models.append((Section(options: [
+            SettingsOptionType.switchCell(model: SettingsSwitchOption(title: "Авиарежим", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
+                print("Вы нажали на авиарежим")
+                    }, isOn: true)),
+            SettingsOptionType.staticCell(model: SettingsOption(title: "WiFi", icon: UIImage(systemName: "house"), iconBackgroundColor: .systemPink) {
+                    print("Topped first cell")
+                    }),
+            SettingsOptionType.staticCell(model: SettingsOption(title: "Bluetooth", icon: UIImage(systemName: "bluetooth"), iconBackgroundColor: .link) {
 
-        models.append(
-            // зачем контент of
-            contentsOf: [
-        (SettingsOption(title: "Уведомления", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-    print("Вы нажали на авиарежим")
-        })),
-        (SettingsOption(title: "Звуки, тактильные сигналы", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-    print("Вы нажали на авиарежим")
-        })),
-        (SettingsOption(title: "Не беспокоить", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-    print("Вы нажали на авиарежим")
-        })),
-        (SettingsOption(title: "Экранное время", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-    print("Вы нажали на авиарежим")
-        })),
-        (SettingsOption(title: "Основные", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-    print("Вы нажали на авиарежим")
-        })),
-        (SettingsOption(title: "Пункт управления", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-    print("Вы нажали на авиарежим")
-        })),
-        (SettingsOption(title: "Экран и яркость", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-    print("Вы нажали на авиарежим")
-        })),
-        (SettingsOption(title: "Экран Домой", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-    print("Вы нажали на авиарежим")
-        })),
-            ])
+                    }),
+            SettingsOptionType.staticCell(model: SettingsOption(title: "Airplane Mode", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemGreen) {
+
+                    }),
+            SettingsOptionType.staticCell(model: SettingsOption(title: "iCloud", icon: UIImage(systemName: "cloud"), iconBackgroundColor: .systemOrange) {
+                    }),
+            SettingsOptionType.switchCell(model: SettingsSwitchOption(title: "Авиарежим", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
+                print("Вы нажали на авиарежим")
+                    }, isOn: true))
+        ]))
+        )
+
+
+        models.append((Section(options: [
+            SettingsOptionType.staticCell(model: SettingsOption(title: "WiFi", icon: UIImage(systemName: "house"), iconBackgroundColor: .systemPink) {
+                    print("Topped first cell")
+                    }),
+            SettingsOptionType.staticCell(model: SettingsOption(title: "Bluetooth", icon: UIImage(systemName: "bluetooth"), iconBackgroundColor: .link) {
+
+                    }),
+            SettingsOptionType.staticCell(model: SettingsOption(title: "Airplane Mode", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemGreen) {
+
+                    }),
+            SettingsOptionType.staticCell(model: SettingsOption(title: "iCloud", icon: UIImage(systemName: "cloud"), iconBackgroundColor: .systemOrange) {
+
+            }),
+        ]))
+        )
+
+        models.append((Section(options: [
+            SettingsOptionType.staticCell(model: SettingsOption(title: "WiFi", icon: UIImage(systemName: "house"), iconBackgroundColor: .systemPink) {
+                    print("Topped first cell")
+                    }),
+            SettingsOptionType.staticCell(model: SettingsOption(title: "Bluetooth", icon: UIImage(systemName: "bluetooth"), iconBackgroundColor: .link) {
+
+                    }),
+            SettingsOptionType.staticCell(model: SettingsOption(title: "Airplane Mode", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemGreen) {
+
+                    }),
+            SettingsOptionType.staticCell(model: SettingsOption(title: "iCloud", icon: UIImage(systemName: "cloud"), iconBackgroundColor: .systemOrange) {
+
+            }),
+        ]))
+        )
+
+
+
+
+
+
+
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+
+
+    func numberOfSections(in tableView: UITableView) -> Int {
         return models.count
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return models[section].options.count
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = models[indexPath.row]
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: SettingTableViewCell.identifier,
-            for: indexPath
-        ) as? SettingTableViewCell else  {
-            return UITableViewCell()
-        }
-        cell.configure(with: model)
-        return cell
+            let model = models[indexPath.section].options[indexPath.row]
+            switch model.self {
+            case .staticCell(let model):
+                guard let cell = tableView.dequeueReusableCell(
+                    withIdentifier: SettingTableViewCell.identifier,
+                    for: indexPath
+                ) as? SettingTableViewCell else  {
+                    return UITableViewCell()
+                }
+                cell.configure(with: model)
+                return cell
+
+            case .switchCell(let model):
+                guard let cell = tableView.dequeueReusableCell(
+                    withIdentifier: SwitchTableViewCell.identifier,
+                    for: indexPath
+                ) as? SwitchTableViewCell else  {
+                    return UITableViewCell()
+                }
+                cell.configure(with: model)
+                return cell
+            }
     }
 
     

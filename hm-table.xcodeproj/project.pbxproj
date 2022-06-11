@@ -15,6 +15,7 @@
 		F15F71522854A2710080E787 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F15F71502854A2710080E787 /* LaunchScreen.storyboard */; };
 		F15F715A2854C23C0080E787 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15F71592854C23C0080E787 /* SettingTableViewCell.swift */; };
 		F15F715C2854DA490080E787 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15F715B2854DA490080E787 /* SwitchTableViewCell.swift */; };
+		F15F715E2854ECDA0080E787 /* AdditionalLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15F715D2854ECDA0080E787 /* AdditionalLabelTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		F15F71532854A2710080E787 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F15F71592854C23C0080E787 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		F15F715B2854DA490080E787 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		F15F715D2854ECDA0080E787 /* AdditionalLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalLabelTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +46,7 @@
 		F15F71392854A26E0080E787 = {
 			isa = PBXGroup;
 			children = (
+				F15F715D2854ECDA0080E787 /* AdditionalLabelTableViewCell.swift */,
 				F15F71442854A26E0080E787 /* hm-table */,
 				F15F71432854A26E0080E787 /* Products */,
 			);
@@ -149,6 +152,7 @@
 				F15F715C2854DA490080E787 /* SwitchTableViewCell.swift in Sources */,
 				F15F715A2854C23C0080E787 /* SettingTableViewCell.swift in Sources */,
 				F15F71482854A26E0080E787 /* SceneDelegate.swift in Sources */,
+				F15F715E2854ECDA0080E787 /* AdditionalLabelTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
