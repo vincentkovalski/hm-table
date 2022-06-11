@@ -42,7 +42,6 @@
 		F15F71392854A26E0080E787 = {
 			isa = PBXGroup;
 			children = (
-				F15F71592854C23C0080E787 /* SettingTableViewCell.swift */,
 				F15F71442854A26E0080E787 /* hm-table */,
 				F15F71432854A26E0080E787 /* Products */,
 			);
@@ -66,6 +65,7 @@
 				F15F714E2854A2710080E787 /* Assets.xcassets */,
 				F15F71502854A2710080E787 /* LaunchScreen.storyboard */,
 				F15F71532854A2710080E787 /* Info.plist */,
+				F15F71592854C23C0080E787 /* SettingTableViewCell.swift */,
 			);
 			path = "hm-table";
 			sourceTree = "<group>";
