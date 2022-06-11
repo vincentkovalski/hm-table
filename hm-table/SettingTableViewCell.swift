@@ -9,6 +9,8 @@ import UIKit
 
 class SettingTableViewCell: UITableViewCell {
 
+    static let identifier = "SettingTableViewCell"
+
 
     private let iconContainer: UIView = {
         let view = UIView()
@@ -27,7 +29,6 @@ class SettingTableViewCell: UITableViewCell {
 
     private let label: UILabel = {
         let label = UILabel()
-        // одна стройка метки
         label.numberOfLines = 1
         return label
     }()
@@ -38,11 +39,43 @@ class SettingTableViewCell: UITableViewCell {
         contentView.addSubview(label)
         contentView.addSubview(iconContainer)
         iconContainer.addSubview(iconImageView)
+
+        contentView.clipsToBounds = true
+        accessoryType = .disclosureIndicator
         
 
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let size: CGFloat = contentView.frame.size.height - 12
+        iconContainer.frame = CGRect(x: 15, y: 6, width: size, height: size)
+
+        let imageSize: CGFloat = size/1.5
+        iconImageView.frame = CGRect(x: (size-imageSize)/2, y: (size-imageSize)/2, width: imageSize, height: imageSize)
+
+        label.frame = CGRect(x: 25 + iconContainer.frame.size.width,
+                             y: 0,
+                             width: contentView.frame.size.width - 20 - iconContainer.frame.size.width,
+                             height: contentView.frame.size.height
+                             )
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        iconImageView.image = nil
+        label.text = nil
+        iconContainer.backgroundColor = nil
+    }
+
+
+    public func configure(with model: SettingsOption) {
+        label.text = model.title
+        iconImageView.image = model.icon
+        iconContainer.backgroundColor = model.iconBackgroundColor
     }
 
 

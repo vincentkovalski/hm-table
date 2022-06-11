@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 struct SettingsOption {
     let title: String
     let icon: UIImage?
@@ -19,7 +20,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        table.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
 
         return table
     }()
@@ -97,11 +98,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = models[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = model.title
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: SettingTableViewCell.identifier,
+            for: indexPath
+        ) as? SettingTableViewCell else  {
+            return UITableViewCell()
+        }
+        cell.configure(with: model)
         return cell
     }
 
+    
 
 
 
