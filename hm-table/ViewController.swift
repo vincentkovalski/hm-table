@@ -14,6 +14,25 @@ struct Section {
 enum SettingsOptionType {
     case staticCell(model: SettingsOption)
     case switchCell(model: SettingsSwitchOption)
+    case addLabelCell(model: SettingsAdditionalLabelOption)
+    case notificationCell(model: SettingsNotificationOption)
+}
+
+struct SettingsNotificationOption {
+    let title: String
+    let icon: UIImage?
+    let iconBackgroundColor: UIColor
+    let addLabelText: String
+    let handler: (() -> Void)
+    let labelContainerBackgroundColor: UIColor
+}
+
+struct SettingsAdditionalLabelOption {
+    let title: String
+    let icon: UIImage?
+    let iconBackgroundColor: UIColor
+    let addLabelText: String
+    let handler: (() -> Void)
 }
 
 
@@ -39,6 +58,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
         table.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifier)
+        table.register(AdditionalLabelTableViewCell.self, forCellReuseIdentifier: AdditionalLabelTableViewCell.identifier)
+        table.register(NotificationTableViewCell.self, forCellReuseIdentifier: NotificationTableViewCell.identifier)
+
 
         return table
     }()
@@ -65,12 +87,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             SettingsOptionType.switchCell(model: SettingsSwitchOption(title: "Авиарежим", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
                 print("Вы нажали на авиарежим")
                     }, isOn: true)),
-            SettingsOptionType.staticCell(model: SettingsOption(title: "WiFi", icon: UIImage(systemName: "house"), iconBackgroundColor: .systemPink) {
-                    print("Topped first cell")
-                    }),
-            SettingsOptionType.staticCell(model: SettingsOption(title: "Bluetooth", icon: UIImage(systemName: "bluetooth"), iconBackgroundColor: .link) {
-
-                    }),
+            SettingsOptionType.addLabelCell(model: SettingsAdditionalLabelOption(title: "WiFi", icon: UIImage(systemName: "house"), iconBackgroundColor: .systemBlue, addLabelText: "Не подключено", handler: {
+                print("Topped first cell")
+            })),
+            SettingsOptionType.addLabelCell(model: SettingsAdditionalLabelOption(title: "Bluetooth", icon: UIImage(systemName: "bluetooth"), iconBackgroundColor: .systemBlue, addLabelText: "Вкл.", handler: {
+                print("Topped first cell")
+            })),
             SettingsOptionType.staticCell(model: SettingsOption(title: "Airplane Mode", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemGreen) {
 
                     }),
@@ -84,25 +106,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 
         models.append((Section(options: [
-            SettingsOptionType.staticCell(model: SettingsOption(title: "WiFi", icon: UIImage(systemName: "house"), iconBackgroundColor: .systemPink) {
-                    print("Topped first cell")
+            SettingsOptionType.staticCell(model: SettingsOption(title: "Bluetooth", icon: UIImage(systemName: "bluetooth"), iconBackgroundColor: .link) {
                     }),
             SettingsOptionType.staticCell(model: SettingsOption(title: "Bluetooth", icon: UIImage(systemName: "bluetooth"), iconBackgroundColor: .link) {
-
                     }),
             SettingsOptionType.staticCell(model: SettingsOption(title: "Airplane Mode", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemGreen) {
-
                     }),
             SettingsOptionType.staticCell(model: SettingsOption(title: "iCloud", icon: UIImage(systemName: "cloud"), iconBackgroundColor: .systemOrange) {
-
             }),
         ]))
         )
 
         models.append((Section(options: [
-            SettingsOptionType.staticCell(model: SettingsOption(title: "WiFi", icon: UIImage(systemName: "house"), iconBackgroundColor: .systemPink) {
-                    print("Topped first cell")
-                    }),
+            SettingsOptionType.notificationCell(model: SettingsNotificationOption(title: "Основные", icon: UIImage(systemName: "house"), iconBackgroundColor: .systemBlue, addLabelText: "1", handler: {
+
+            }, labelContainerBackgroundColor: .systemRed)
+                                               ),
             SettingsOptionType.staticCell(model: SettingsOption(title: "Bluetooth", icon: UIImage(systemName: "bluetooth"), iconBackgroundColor: .link) {
 
                     }),
@@ -114,12 +133,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }),
         ]))
         )
-
-
-
-
-
-
 
     }
 
@@ -137,6 +150,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let model = models[indexPath.section].options[indexPath.row]
             switch model.self {
+
             case .staticCell(let model):
                 guard let cell = tableView.dequeueReusableCell(
                     withIdentifier: SettingTableViewCell.identifier,
@@ -152,6 +166,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     withIdentifier: SwitchTableViewCell.identifier,
                     for: indexPath
                 ) as? SwitchTableViewCell else  {
+                    return UITableViewCell()
+                }
+                cell.configure(with: model)
+                return cell
+
+            case .addLabelCell(model: let model):
+                guard let cell = tableView.dequeueReusableCell(
+                    withIdentifier: AdditionalLabelTableViewCell.identifier,
+                    for: indexPath
+                ) as? AdditionalLabelTableViewCell else  {
+                    return UITableViewCell()
+                }
+                cell.configure(with: model)
+                return cell
+            case .notificationCell(model: let model):
+                guard let cell = tableView.dequeueReusableCell(
+                    withIdentifier: NotificationTableViewCell.identifier,
+                    for: indexPath
+                ) as? NotificationTableViewCell else  {
                     return UITableViewCell()
                 }
                 cell.configure(with: model)
