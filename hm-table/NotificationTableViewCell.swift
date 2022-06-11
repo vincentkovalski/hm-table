@@ -109,6 +109,8 @@ class NotificationTableViewCell: UITableViewCell {
         additionalLabel.text = model.addLabelText
     }
 
+    
+
 
 
 }

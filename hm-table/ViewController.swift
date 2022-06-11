@@ -73,6 +73,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         confifure()
         title = "Настройки"
+    
 
         view.addSubview(tableView)
 
@@ -85,22 +86,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func confifure() {
         models.append((Section(options: [
             SettingsOptionType.switchCell(model: SettingsSwitchOption(title: "Авиарежим", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-                print("Вы нажали на авиарежим")
-                    }, isOn: true)),
-            SettingsOptionType.addLabelCell(model: SettingsAdditionalLabelOption(title: "WiFi", icon: UIImage(systemName: "house"), iconBackgroundColor: .systemBlue, addLabelText: "Не подключено", handler: {
+                print("Нажата ячейка Авиарежим")
+                    }, isOn: false)),
+            SettingsOptionType.addLabelCell(model: SettingsAdditionalLabelOption(title: "Wi-Fi", icon: UIImage(systemName: "wifi"), iconBackgroundColor: .systemBlue, addLabelText: "Не подключено", handler: {
                 print("Topped first cell")
             })),
-            SettingsOptionType.addLabelCell(model: SettingsAdditionalLabelOption(title: "Bluetooth", icon: UIImage(systemName: "bluetooth"), iconBackgroundColor: .systemBlue, addLabelText: "Вкл.", handler: {
+            SettingsOptionType.addLabelCell(model: SettingsAdditionalLabelOption(title: "Bluetooth", icon: UIImage(systemName: "dot.radiowaves.right"), iconBackgroundColor: .systemBlue, addLabelText: "Вкл.", handler: {
                 print("Topped first cell")
             })),
-            SettingsOptionType.staticCell(model: SettingsOption(title: "Airplane Mode", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemGreen) {
+            SettingsOptionType.staticCell(model: SettingsOption(title: "Сотовая связь", icon: UIImage(systemName: "antenna.radiowaves.left.and.right"), iconBackgroundColor: .systemGreen) {
 
                     }),
-            SettingsOptionType.staticCell(model: SettingsOption(title: "iCloud", icon: UIImage(systemName: "cloud"), iconBackgroundColor: .systemOrange) {
+            SettingsOptionType.staticCell(model: SettingsOption(title: "Режим модема", icon: UIImage(systemName: "personalhotspot"), iconBackgroundColor: .systemGreen) {
                     }),
-            SettingsOptionType.switchCell(model: SettingsSwitchOption(title: "Авиарежим", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
+            SettingsOptionType.switchCell(model: SettingsSwitchOption(title: "VPN", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemBlue, handler: {
                 print("Вы нажали на авиарежим")
-                    }, isOn: true))
+                    }, isOn: false))
         ]))
         )
 
@@ -191,7 +192,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 return cell
             }
     }
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let type = models[indexPath.section].options[indexPath.row]
+        switch type.self {
+        case .staticCell(let model):
+            model.handler()
+        case .switchCell(let model):
+            model.handler()
+        // обработчик нажатия?
+        case .addLabelCell(model: let model):
+            model.handler()
+        case .notificationCell(model: let model):
+            model.handler()
+        }
+    }
     
 
 
