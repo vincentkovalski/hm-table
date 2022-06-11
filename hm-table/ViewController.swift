@@ -7,13 +7,30 @@
 
 import UIKit
 
+struct Section {
+    let options: [SettingsOption]
+}
+
+enum SettingsOptionType {
+    case staticCell(model: SettingsOption)
+    case switchCell(model: SettingsSwitchOption)
+}
+
 
 struct SettingsOption {
     let title: String
     let icon: UIImage?
     let iconBackgroundColor: UIColor
     let handler: (() -> Void)
+}
 
+struct SettingsSwitchOption {
+    let title: String
+    let icon: UIImage?
+    let iconBackgroundColor: UIColor
+    let handler: (() -> Void)
+    // дополнительное свойство
+    var isOn: Bool
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -43,7 +60,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 
     func confifure() {
-        self.models.append(
+        models.append(
             // зачем контент of
             contentsOf: [
                 (SettingsOption(title: "Авиарежим", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
@@ -64,32 +81,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 (SettingsOption(title: "VPN", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
             print("Вы нажали на авиарежим")
                 })),
-                (SettingsOption(title: "Уведомления", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "Звуки, тактильные сигналы", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "Не беспокоить", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "Экранное время", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "Основные", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "Пункт управления", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "Экран и яркость", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
-                (SettingsOption(title: "Экран Домой", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
-            print("Вы нажали на авиарежим")
-                })),
+            ])
 
-                           ])
+        models.append(
+            // зачем контент of
+            contentsOf: [
+        (SettingsOption(title: "Уведомления", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
+    print("Вы нажали на авиарежим")
+        })),
+        (SettingsOption(title: "Звуки, тактильные сигналы", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
+    print("Вы нажали на авиарежим")
+        })),
+        (SettingsOption(title: "Не беспокоить", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
+    print("Вы нажали на авиарежим")
+        })),
+        (SettingsOption(title: "Экранное время", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
+    print("Вы нажали на авиарежим")
+        })),
+        (SettingsOption(title: "Основные", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
+    print("Вы нажали на авиарежим")
+        })),
+        (SettingsOption(title: "Пункт управления", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
+    print("Вы нажали на авиарежим")
+        })),
+        (SettingsOption(title: "Экран и яркость", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
+    print("Вы нажали на авиарежим")
+        })),
+        (SettingsOption(title: "Экран Домой", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
+    print("Вы нажали на авиарежим")
+        })),
+            ])
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
