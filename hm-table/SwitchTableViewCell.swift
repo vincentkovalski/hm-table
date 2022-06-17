@@ -26,8 +26,11 @@ class SwitchTableViewCell: UITableViewCell {
         // это чтобы иконка была на всю в квадрат с закругленными полями
         imageView.contentMode = .scaleAspectFit
 
+
         return imageView
     }()
+
+
 
     private let label: UILabel = {
         let label = UILabel()
