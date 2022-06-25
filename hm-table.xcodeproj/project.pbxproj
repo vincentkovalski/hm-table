@@ -64,19 +64,75 @@
 		F15F71442854A26E0080E787 /* hm-table */ = {
 			isa = PBXGroup;
 			children = (
-				F15F71452854A26E0080E787 /* AppDelegate.swift */,
-				F15F71472854A26E0080E787 /* SceneDelegate.swift */,
-				F15F71492854A26E0080E787 /* ViewController.swift */,
-				F15F714B2854A26E0080E787 /* Main.storyboard */,
-				F15F714E2854A2710080E787 /* Assets.xcassets */,
-				F15F71502854A2710080E787 /* LaunchScreen.storyboard */,
-				F15F71532854A2710080E787 /* Info.plist */,
+				F1B17C9D2866EF9900C11E3B /* Resources */,
+				F1B17C9E2866EFB200C11E3B /* Sources */,
 				F15F71592854C23C0080E787 /* SettingTableViewCell.swift */,
 				F15F715B2854DA490080E787 /* SwitchTableViewCell.swift */,
 				F15F715D2854ECDA0080E787 /* AdditionalLabelTableViewCell.swift */,
 				F15F715F2854F6B90080E787 /* NotificationTableViewCell.swift */,
 			);
 			path = "hm-table";
+			sourceTree = "<group>";
+		};
+		F1B17C9A2866EF2B00C11E3B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F1B17C9B2866EF4400C11E3B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F1B17C9C2866EF4D00C11E3B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F15F71492854A26E0080E787 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F1B17C9D2866EF9900C11E3B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F15F714B2854A26E0080E787 /* Main.storyboard */,
+				F15F71502854A2710080E787 /* LaunchScreen.storyboard */,
+				F15F714E2854A2710080E787 /* Assets.xcassets */,
+				F15F71532854A2710080E787 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F1B17C9E2866EFB200C11E3B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				F1B17C9F2866EFEF00C11E3B /* App */,
+				F1B17CA02866EFF500C11E3B /* Scene */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		F1B17C9F2866EFEF00C11E3B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F15F71452854A26E0080E787 /* AppDelegate.swift */,
+				F15F71472854A26E0080E787 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F1B17CA02866EFF500C11E3B /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				F1B17C9B2866EF4400C11E3B /* View */,
+				F1B17C9A2866EF2B00C11E3B /* Model */,
+				F1B17C9C2866EF4D00C11E3B /* Controller */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,7 +361,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AMBQU454ZC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "hm-table/Info.plist";
+				INFOPLIST_FILE = "hm-table/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -333,7 +389,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AMBQU454ZC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "hm-table/Info.plist";
+				INFOPLIST_FILE = "hm-table/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
