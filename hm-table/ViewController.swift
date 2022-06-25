@@ -1,14 +1,52 @@
-//
-//  ViewController.swift
-//  hm-table
-//
-//  Created by Виктор Ковалевский on 11.06.2022.
-//
-
 import UIKit
-
-class ViewController: UIViewController {
-
+struct Section {
+    let options: [SettingsOptionType]
+}
+enum SettingsOptionType {
+    case staticCell(model: SettingsOption)
+    case switchCell(model: SettingsSwitchOption)
+    case addLabelCell(model: SettingsAdditionalLabelOption)
+    case notificationCell(model: SettingsNotificationOption)
+}
+struct SettingsNotificationOption {
+    let title: String
+    let icon: UIImage?
+    let iconBackgroundColor: UIColor
+    let addLabelText: String
+    let handler: (() -> Void)
+    let labelContainerBackgroundColor: UIColor
+}
+struct SettingsAdditionalLabelOption {
+    let title: String
+    let icon: UIImage?
+    let iconBackgroundColor: UIColor
+    let addLabelText: String
+    let handler: (() -> Void)
+}
+struct SettingsOption {
+    let title: String
+    let icon: UIImage?
+    let iconBackgroundColor: UIColor
+    let handler: (() -> Void)
+}
+struct SettingsSwitchOption {
+    let title: String
+    let icon: UIImage?
+    let iconBackgroundColor: UIColor
+    let handler: (() -> Void)
+    // дополнительное свойство
+    var isOn: Bool
+}
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    private let tableView: UITableView = {
+        let table = UITableView(frame: .zero, style: .grouped)
+        table.register(SettingTableViewCell.self, forCellReuseIdentifier: SettingTableViewCell.identifier)
+        table.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifier)
+        table.register(AdditionalLabelTableViewCell.self, forCellReuseIdentifier: AdditionalLabelTableViewCell.identifier)
+        table.register(NotificationTableViewCell.self, forCellReuseIdentifier: NotificationTableViewCell.identifier)
+        return table
+    }()
+    var models = [Section]()
     override func viewDidLoad() {
         super.viewDidLoad()
         confifure()
@@ -18,7 +56,6 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.frame = view.bounds
     }
-
     func confifure() {
         models.append((Section(options: [
             SettingsOptionType.switchCell(model: SettingsSwitchOption(title: "Авиарежим", icon: UIImage(systemName: "airplane"), iconBackgroundColor: .systemOrange, handler: {
@@ -134,7 +171,5 @@ class ViewController: UIViewController {
             model.handler()
         }
     }
-
-
 }
 
